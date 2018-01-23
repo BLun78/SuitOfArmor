@@ -1,4 +1,6 @@
-﻿using JetBrains.Annotations;
+﻿using System;
+using JetBrains.Annotations;
+using Microsoft.Extensions.Primitives;
 
 namespace BLun.SuitOfArmor.Common.CacheControle
 {
@@ -19,8 +21,10 @@ namespace BLun.SuitOfArmor.Common.CacheControle
     /// 
     /// cache-extension = token [ "=" ( token | quoted-string ) ]
     /// </summary>
-    internal static class CacheResponseDirective
+    public static class CacheResponseDirective
     {
+        internal static readonly string[] ParameterList = new[] {"max-age", "s-maxage"};
+
         /// <summary>
         /// https://www.w3.org/Protocols/rfc2616/rfc2616-sec14.html#sec14.9.1
         /// 
@@ -28,8 +32,8 @@ namespace BLun.SuitOfArmor.Common.CacheControle
         /// "public"
         /// </summary>
         /// <returns>cache-response-directive name</returns>
-        public static string @Public() => "public";
-        
+        public const string @Public = "public";
+
         /// <summary>
         /// https://www.w3.org/Protocols/rfc2616/rfc2616-sec14.html#sec14.9.1
         /// 
@@ -37,8 +41,8 @@ namespace BLun.SuitOfArmor.Common.CacheControle
         /// "private" [ "=" <"> 1#field-name <"> ]
         /// </summary>
         /// <returns>cache-response-directive name</returns>
-        public static string @Private() => "private";
-        
+        public const string @Private = "private";
+
         /// <summary>
         /// https://www.w3.org/Protocols/rfc2616/rfc2616-sec14.html#sec14.9.1
         /// 
@@ -46,8 +50,8 @@ namespace BLun.SuitOfArmor.Common.CacheControle
         /// "no-cache" [ "=" <"> 1#field-name <"> ]
         /// </summary>
         /// <returns>cache-response-directive name</returns>
-        public static string NoCache() => "no-cache";
-        
+        public const string NoCache = "no-cache";
+
         /// <summary>
         /// https://www.w3.org/Protocols/rfc2616/rfc2616-sec14.html#sec14.9.2
         /// 
@@ -55,7 +59,7 @@ namespace BLun.SuitOfArmor.Common.CacheControle
         /// "no-store"
         /// </summary>
         /// <returns>cache-response-directive name</returns>
-        public static string NoStore() => "no-store";
+        public const string NoStore = "no-store";
 
         /// <summary>
         /// https://www.w3.org/Protocols/rfc2616/rfc2616-sec14.html#sec14.9.5
@@ -64,8 +68,8 @@ namespace BLun.SuitOfArmor.Common.CacheControle
         /// "no-transform"
         /// </summary>
         /// <returns>cache-response-directive name</returns>
-        public static string NoTransform() => "no-transform";
-        
+        public const string NoTransform = "no-transform";
+
         /// <summary>
         /// https://www.w3.org/Protocols/rfc2616/rfc2616-sec14.html#sec14.9.4
         /// 
@@ -73,8 +77,8 @@ namespace BLun.SuitOfArmor.Common.CacheControle
         /// "must-revalidate"
         /// </summary>
         /// <returns>cache-response-directive name</returns>
-        public static string MustRevalidate() => "must-revalidate";
-        
+        public const string MustRevalidate = "must-revalidate";
+
         /// <summary>
         /// https://www.w3.org/Protocols/rfc2616/rfc2616-sec14.html#sec14.9.4
         /// 
@@ -82,8 +86,8 @@ namespace BLun.SuitOfArmor.Common.CacheControle
         /// "proxy-revalidate"
         /// </summary>
         /// <returns>cache-response-directive name</returns>
-        public static string ProxyRevalidate() => "proxy-revalidate";
-        
+        public const string ProxyRevalidate = "proxy-revalidate";
+
         /// <summary>
         /// https://www.w3.org/Protocols/rfc2616/rfc2616-sec14.html#sec14.9.3
         /// 
@@ -91,12 +95,8 @@ namespace BLun.SuitOfArmor.Common.CacheControle
         /// "max-age" "=" delta-seconds
         /// </summary>
         /// <returns>cache-response-directive name</returns>
-        public static string MaxAge([NotNull] long deltaSeconds)
-        {
-            return $"{_maxAge}={deltaSeconds}";
-        }
-        private static readonly string _maxAge = "max-age";
-        
+        public const string MaxAge = "max-age";
+
         /// <summary>
         /// https://www.w3.org/Protocols/rfc2616/rfc2616-sec14.html#sec14.9.3
         /// 
@@ -104,35 +104,6 @@ namespace BLun.SuitOfArmor.Common.CacheControle
         /// "s-maxage" "=" delta-seconds
         /// </summary>
         /// <returns>cache-response-directive name</returns>
-        public static string SMaxage([NotNull] long deltaSeconds)
-        {
-            return $"{_sMaxage}={deltaSeconds}";
-        }
-        private static readonly string _sMaxage = "s-maxage";
-        
-        /// <summary>
-        /// https://www.w3.org/Protocols/rfc2616/rfc2616-sec14.html#sec14.9.6
-        /// 
-        /// cache-response-directive =
-        /// cache-extension
-        /// 
-        /// cache-extension = token
-        /// </summary>
-        /// <returns>cache-response-directive name</returns>
-        public static string CacheExtension() => "token";
-
-        /// <summary>
-        /// https://www.w3.org/Protocols/rfc2616/rfc2616-sec14.html#sec14.9.6
-        /// 
-        /// cache-response-directive =
-        /// cache-extension
-        /// 
-        /// cache-extension = token "=" ( token | quoted-string )
-        /// </summary>
-        /// <returns>cache-response-directive name</returns>
-        public static string CacheExtension(string tokenOrQuotedString)
-        {
-            return $"{CacheExtension()}={tokenOrQuotedString}";
-        }
+        public const string SMaxage = "s-maxage";
     }
 }

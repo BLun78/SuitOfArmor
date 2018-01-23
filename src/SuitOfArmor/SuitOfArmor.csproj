@@ -1,9 +1,26 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
     <TargetFramework>netstandard2.0</TargetFramework>
+    <LangVersion>7.1</LangVersion>
     <AssemblyName>BLun.SuitOfArmor</AssemblyName>
     <RootNamespace>BLun.SuitOfArmor</RootNamespace>
-    <LangVersion>7.1</LangVersion>
+    <Title>BLun.SuitOfArmor</Title>
+    <PackageId>BLun.SuitOfArmor</PackageId>
+    <Description>Suit of Armor for Asp.Net Core MVC6 for .NetStandard 2.0</Description>
+    <Authors>Björn Lundström (@github: BLun78)</Authors>
+    <Owners>@github: BLun78, Björn Lundström, Germany</Owners>
+    <RepositoryType>git</RepositoryType>
+    <PackageTags>AspNetCore MVC6 Middleware .NETStandard2.0</PackageTags>
+    <Copyright>Copyright 2018 (c) Björn Lundström, Germany. All rights reserved.</Copyright>
+    <PackageProjectUrl>https://github.com/BLun78/SuitOfArmor</PackageProjectUrl>
+    <PackageLicenseUrl>http://opensource.org/licenses/MIT</PackageLicenseUrl>
+    <RepositoryUrl>https://github.com/BLun78/SuitOfArmor.git</RepositoryUrl>
+    <PackageVersion>1.0.0</PackageVersion>
+    <PackageVersionPrefix>1.0.0</PackageVersionPrefix>
+    <Version>1.0.0</Version>
+    <PackageVersionSuffix>
+    </PackageVersionSuffix>
+    <PackOnBuild>true</PackOnBuild>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DocumentationFile>bin\Debug\netstandard2.0\SuitOfArmor.xml</DocumentationFile>
@@ -12,10 +29,17 @@
     <DocumentationFile>bin\Release\netstandard2.0\SuitOfArmor.xml</DocumentationFile>
   </PropertyGroup>
   <ItemGroup>
-    <PackageReference Include="JetBrains.Annotations" Version="11.1.0" />
-    <PackageReference Include="Microsoft.AspNetCore.Http" Version="2.0.1" />
+    <PackageReference Include="JetBrains.Annotations" Version="11.1.0">
+      <PrivateAssets>All</PrivateAssets>
+    </PackageReference>
+    <PackageReference Include="Microsoft.AspNetCore.Http.Abstractions" Version="2.0.1" />
+    <PackageReference Include="Microsoft.AspNetCore.Mvc.Abstractions" Version="2.0.2" />
     <PackageReference Include="Microsoft.Extensions.DependencyInjection.Abstractions" Version="2.0.0" />
     <PackageReference Include="Microsoft.Extensions.Logging.Abstractions" Version="2.0.0" />
     <PackageReference Include="Microsoft.Extensions.Options" Version="2.0.0" />
+    <PackageReference Include="Microsoft.Net.Http.Headers" Version="2.0.1" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Common\Helper\" />
   </ItemGroup>
 </Project>

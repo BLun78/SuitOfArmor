@@ -1,5 +1,6 @@
 ﻿using System;
 using JetBrains.Annotations;
+using Microsoft.Extensions.Primitives;
 
 namespace BLun.SuitOfArmor.Common.CacheControle
 {
@@ -20,6 +21,8 @@ namespace BLun.SuitOfArmor.Common.CacheControle
     /// </summary>
     internal static class CacheRequestDirective
     {
+        internal static readonly string[] ParameterList = new[] {"max-age", "max-stale", "min-fresh"};
+        
         /// <summary>
         /// https://www.w3.org/Protocols/rfc2616/rfc2616-sec14.html#sec14.9.1
         /// 
@@ -27,8 +30,8 @@ namespace BLun.SuitOfArmor.Common.CacheControle
         /// "no-cache"
         /// </summary>
         /// <returns>cache-request-directive name</returns>
-        public static string NoCache() => "no-cache";
-        
+        public static StringValues NoCache = "no-cache";
+
         /// <summary>
         /// https://www.w3.org/Protocols/rfc2616/rfc2616-sec14.html#sec14.9.2
         /// 
@@ -36,8 +39,8 @@ namespace BLun.SuitOfArmor.Common.CacheControle
         /// "no-store"
         /// </summary>
         /// <returns>cache-request-directive name</returns>
-        public static string NoStore() => "no-store";
-        
+        public static StringValues NoStore = "no-store";
+
         /// <summary>
         /// https://www.w3.org/Protocols/rfc2616/rfc2616-sec14.html#sec14.9.3
         /// https://www.w3.org/Protocols/rfc2616/rfc2616-sec14.html#sec14.9.4
@@ -46,32 +49,17 @@ namespace BLun.SuitOfArmor.Common.CacheControle
         /// "max-age" "=" delta-seconds
         /// </summary>
         /// <returns>cache-request-directive name</returns>
-        public static string MaxAge([NotNull] long deltaSeconds)
-        {
-            return $"{_maxAge}={deltaSeconds}";
-        }
-        private static readonly string _maxAge = "max-age";
-        
+        public static StringValues MaxAge = "max-age";
+
         /// <summary>
         /// https://www.w3.org/Protocols/rfc2616/rfc2616-sec14.html#sec14.9.3
         /// 
         /// cache-request-directive =
-        /// "max-stale"
+        /// "max-stale" [ "=" delta-seconds ]
         /// </summary>
         /// <returns>cache-request-directive name</returns>
-        public static string MaxStale() => "max-stale";
-        /// <summary>
-        /// https://www.w3.org/Protocols/rfc2616/rfc2616-sec14.html#sec14.9.3
-        /// 
-        /// cache-request-directive =
-        /// "max-stale" "=" delta-seconds
-        /// </summary>
-        /// <returns>cache-request-directive name</returns>
-        public static string MaxStale([NotNull] long deltaSeconds)
-        {
-            return $"{MaxStale()}={deltaSeconds}";
-        }
-        
+        public static StringValues MaxStale = "max-stale";
+
         /// <summary>
         /// https://www.w3.org/Protocols/rfc2616/rfc2616-sec14.html#sec14.9.3
         /// 
@@ -79,12 +67,8 @@ namespace BLun.SuitOfArmor.Common.CacheControle
         /// "min-fresh" "=" delta-seconds
         /// </summary>
         /// <returns>cache-request-directive name</returns>
-        public static string MinFresh([NotNull] long deltaSeconds)
-        {
-            return $"{_minFresh}={deltaSeconds}";
-        }
-        private static readonly string _minFresh = "min-fresh";
-        
+        public static StringValues MinFresh = "min-fresh";
+
         /// <summary>
         /// https://www.w3.org/Protocols/rfc2616/rfc2616-sec14.html#sec14.9.5
         /// 
@@ -92,8 +76,8 @@ namespace BLun.SuitOfArmor.Common.CacheControle
         /// "no-transform"
         /// </summary>
         /// <returns>cache-request-directive name</returns>
-        public static string NoTransform() => "no-transform";
-        
+        public static StringValues NoTransform = "no-transform";
+
         /// <summary>
         /// https://www.w3.org/Protocols/rfc2616/rfc2616-sec14.html#sec14.9.4
         /// 
@@ -101,8 +85,8 @@ namespace BLun.SuitOfArmor.Common.CacheControle
         /// "only-if-cached"
         /// </summary>
         /// <returns>cache-request-directive name</returns>
-        public static string OnlyIfCached() => "only-if-cached";
-        
+        public static StringValues OnlyIfCached = "only-if-cached";
+
         /// <summary>
         /// https://www.w3.org/Protocols/rfc2616/rfc2616-sec14.html#sec14.9.6
         /// 
@@ -112,20 +96,7 @@ namespace BLun.SuitOfArmor.Common.CacheControle
         /// cache-extension = token
         /// </summary>
         /// <returns>cache-request-directive name</returns>
-        public static string CacheExtension() => "token";
+        public static StringValues CacheExtension = "token";
 
-        /// <summary>
-        /// https://www.w3.org/Protocols/rfc2616/rfc2616-sec14.html#sec14.9.6
-        /// 
-        /// cache-request-directive =
-        /// cache-extension
-        /// 
-        /// cache-extension = token "=" ( token | quoted-string )
-        /// </summary>
-        /// <returns>cache-request-directive name</returns>
-        public static string CacheExtension(string tokenOrQuotedString)
-        {
-            return $"{CacheExtension()}={tokenOrQuotedString}";
-        }
     }
 }
