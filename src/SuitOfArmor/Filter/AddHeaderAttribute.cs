@@ -64,7 +64,6 @@ namespace BLun.SuitOfArmor.Filter
         /// <param name="next">
         /// The <see cref="T:Microsoft.AspNetCore.Mvc.Filters.ActionExecutionDelegate" />. Invoked to execute the next action filter or the action itself.
         /// </param>
-        /// <param name="invoker"></param>
         /// <returns>A <see cref="T:System.Threading.Tasks.Task" /> that on completion indicates the filter has executed.</returns>
         /// <exception cref="ArgumentNullException">can throw for param:next, param:context, param:invoker</exception>
         /// <exception cref="ArgumentOutOfRangeException">can throw for param:context.HttpContext</exception>
